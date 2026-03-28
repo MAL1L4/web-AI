@@ -8,7 +8,7 @@ st.markdown("""
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap');
 html, body, [class*="css"] { font-family: 'Inter', sans-serif; }
 /* ลบคำสั่งซ่อน header ออกแล้ว เพื่อให้ปุ่มเมนูทำงานได้ปกติ */
-#MainMenu {visibility: hidden;} footer {visibility: hidden;} 
+#MainMenu {visibility: hidden;} footer {visibility: hidden;}
 .block-container { padding-top: 2.2rem; padding-bottom: 2.5rem; }
 .stApp {
   background: radial-gradient(1200px circle at 10% 0%, rgba(99,102,241,0.12), transparent 45%),
