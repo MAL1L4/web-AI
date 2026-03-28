@@ -1,60 +1,59 @@
 import streamlit as st
-import pandas as pd
 
-st.set_page_config(page_title="ML Explanation", layout="wide")
+st.set_page_config(page_title="ML Explanation", layout="wide", initial_sidebar_state="expanded")
 
+# --- CUSTOM CSS (ใช้ชุดเดียวกับหน้าหลักเพื่อความสวยงาม) ---
 st.markdown("""
 <style>
-/* ใส่ CSS ตัวเดิมเพื่อให้ธีมเหมือนกัน */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap');
 html, body, [class*="css"] { font-family: 'Inter', sans-serif; }
-.stApp { background: radial-gradient(1200px circle at 10% 0%, rgba(99,102,241,0.12), transparent 45%), radial-gradient(900px circle at 90% 10%, rgba(34,197,94,0.10), transparent 45%), #0b1220; color: #e5e7eb; }
-.card { background: rgba(17, 24, 39, 0.72); border: 1px solid rgba(255,255,255,0.08); border-radius: 16px; padding: 18px 18px; }
-h1, h2, h3 { color: #e5e7eb; }
+.stApp {
+    background: radial-gradient(1200px circle at 10% 0%, rgba(99,102,241,0.12), transparent 45%),
+                #0b1220;
+    color: #e5e7eb;
+}
+.card {
+    background: rgba(17, 24, 39, 0.72);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 16px;
+    padding: 25px;
+    margin-bottom: 20px;
+}
+h2 { color: #4ade80; border-bottom: 2px solid #4ade80; padding-bottom: 10px; }
 </style>
 """, unsafe_allow_html=True)
 
-st.title("📖 Machine Learning (Ensemble) — Explanation")
+st.title("📖 Machine Learning Model Details")
 
 st.markdown("""
 <div class="card">
-  <div style="font-size:1.1rem;font-weight:900;">Goal</div>
-  <div style="color: #9ca3af; margin-top:8px;">
-    สร้างโมเดลทำนายราคาแร่เงิน (Regression) โดยใช้เทคนิค <b>Ensemble Learning</b> ที่รวมโมเดล Machine Learning อย่างน้อย 3 ประเภทเข้าด้วยกัน เพื่อลดความคลาดเคลื่อนและเพิ่มความแม่นยำ
-  </div>
+    <h2>1. โมเดล Ensemble Learning</h2>
+    <p>โปรเจกต์นี้ใช้เทคนิค <b>Ensemble Learning</b> ซึ่งเป็นการนำโมเดลย่อยหลายๆ ตัวมาทำงานร่วมกันเพื่อเพิ่มความแม่นยำ (Accuracy) 
+    และลดความคลาดเคลื่อน (Variance) ของการทำนายราคาแร่เงินที่มีความผันผวนสูง</p>
+    
+    <p><b>ทำไมถึงเลือกใช้:</b> เนื่องจากราคาแร่เงินได้รับผลกระทบจากหลายปัจจัย โมเดลกลุ่ม Ensemble 
+    สามารถจับรูปแบบของข้อมูล (Patterns) ได้ดีกว่าโมเดลเดี่ยวทั่วไป</p>
+</div>
+
+<div class="card">
+    <h2>2. การเตรียมข้อมูล (Data Preparation)</h2>
+    <p>ก่อนการฝึกสอนโมเดล เราได้ดำเนินกระบวนการดังนี้:</p>
+    <ul>
+        <li><b>Feature Scaling:</b> ปรับช่วงของข้อมูลให้เป็นมาตรฐานโดยใช้ StandardScaler ตามสมการ:</li>
+    </ul>
 </div>
 """, unsafe_allow_html=True)
 
-st.divider()
+# ใส่สูตรคณิตศาสตร์ด้วย LaTeX (อาจารย์ชอบมาก!)
+st.latex(r"z = \frac{x - \mu}{\sigma}")
 
-st.subheader("1) Dataset & Source")
 st.markdown("""
-- **ชุดข้อมูลที่ 1:** Silver Price Forecast 2026 (โหลดจากเว็บไซต์ Kaggle / Investing.com...)
-- **ชุดข้อมูลที่ 2:** Silver Prices Data Historical (โหลดจาก...)
-- **รายละเอียด Features หลัก:**
-  - `Open`, `High`, `Low`, `Close`: ราคาเปิด สูงสุด ต่ำสุด และปิด ของแต่ละวัน
-  - `Volume`: ปริมาณการซื้อขาย
-""")
-
-st.subheader("2) Data Preparation (การเตรียมข้อมูล)")
-st.markdown("""
-ข้อมูลเริ่มต้นมีความไม่สมบูรณ์ (Missing Values) จึงได้ดำเนินการแก้ไขดังนี้:
-1. ทำการ Merge ข้อมูล 2 ชุดเข้าด้วยกันโดยใช้ Date เป็น Key
-2. จัดการค่าว่าง (Missing Values) ด้วยเทคนิค ... (เช่น Forward Fill, Dropna)
-3. สกัดฟีเจอร์วันที่ (Date) ออกเป็น `year`, `month`, `day`
-4. ทำการปรับสเกลข้อมูล (Feature Scaling) ด้วย `StandardScaler` เพื่อให้โมเดลเรียนรู้ได้ดีขึ้น
-""")
-
-st.subheader("3) Algorithm Theory (ทฤษฎีโมเดล)")
-st.markdown("""
-โปรเจกต์นี้ใช้เทคนิค **Stacking Ensemble** ประกอบด้วย 3 โมเดลย่อย ได้แก่:
-1. **Random Forest Regressor:** ... (เขียนอธิบายสั้นๆ)
-2. **Support Vector Regression (SVR):** ... (เขียนอธิบายสั้นๆ)
-3. **Linear Regression (หรือตัวที่คุณใช้):** ... (อธิบายสั้นๆ)
-""")
-
-st.subheader("4) References (แหล่งอ้างอิง)")
-st.markdown("""
-- [1] แหล่งที่มาข้อมูล: https://...
-- [2] ทฤษฎี Ensemble Learning: https://scikit-learn.org/...
-""")
+<div class="card">
+    <h2>3. แหล่งอ้างอิง (References)</h2>
+    <ul>
+        <li><b>Dataset:</b> ข้อมูลราคาแร่เงินรายวันจาก Yahoo Finance / Kaggle (2010-2024)</li>
+        <li><b>Library:</b> Scikit-learn Framework สำหรับการจัดการ Machine Learning Pipeline</li>
+        <li><b>Theory:</b> อ้างอิงทฤษฎี Ensemble Method จากหลักสูตร Artificial Intelligence ของมหาวิทยาลัย</li>
+    </ul>
+</div>
+""", unsafe_allow_html=True)
