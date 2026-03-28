@@ -1,7 +1,10 @@
 import streamlit as st
 
-st.set_page_config(page_title="Silver Price Predictor", layout="wide")
-
+st.set_page_config(
+    page_title="Silver Price Predictor", 
+    layout="wide",
+    initial_sidebar_state="expanded"  # เพิ่มบรรทัดนี้ครับ สั่งให้เมนูกางออกทันที
+)
 # --- CUSTOM CSS (Dark Theme) ---
 st.markdown("""
 <style>
